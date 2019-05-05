@@ -12,7 +12,7 @@ class _AuthView extends State<AuthView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Feeder'),
+        title: Text('Feeder'),//
       ),
     );
   }
