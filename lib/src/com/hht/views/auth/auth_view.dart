@@ -1,5 +1,5 @@
-import 'package:feeder/src/models/auth_type.dart';
-import 'package:feeder/src/scope_models/main_model.dart';
+import 'package:feeder/src/com/hht/models/auth_type.dart';
+import 'package:feeder/src/com/hht/scope_models/main_model.dart';
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
@@ -11,6 +11,9 @@ class AuthView extends StatefulWidget {
 }
 
 class _AuthView extends State<AuthView> {
+
+
+
   String confirmEmail;
   String _confirmPassword;
 
@@ -48,12 +51,12 @@ class _AuthView extends State<AuthView> {
       controller: _passwordTextEditingController,
       decoration: InputDecoration(
           labelStyle: TextStyle(color: Colors.white),
-          // fillColor: Colors.white, filled: true,
+         
           labelText: 'Password'),
       obscureText: true,
       onSaved: (String value) {
         _formData['password'] = value;
-        // confirmEmail = value;
+       
       },
       validator: (String value) {
         if (value.isEmpty) {
@@ -66,12 +69,11 @@ class _AuthView extends State<AuthView> {
   Widget _buildPasswordConfirmTextField() {
     return TextFormField(style: TextStyle(color: Colors.white),
       decoration: InputDecoration(
-          //fillColor: Colors.white, filled: true,
           labelStyle: TextStyle(color: Colors.white),
           labelText: 'Confirm Password'),
       obscureText: true,
       onSaved: (String value) {
-        // _formData['password'] = value;
+        
         _confirmPassword = value;
       },
       validator: (String value) {
@@ -79,7 +81,7 @@ class _AuthView extends State<AuthView> {
           return 'Password not match';
         }
       },
-      /*enabled: _authMode == AuthMode.Login ? false : true, */
+      
     );
   }
 
@@ -162,6 +164,7 @@ class _AuthView extends State<AuthView> {
                         child: Text(
                             '${_authType == AuthType.Login ? 'Login' : 'Sign Up'}'),
                         onPressed: () {
+                          model.signup('andymota@gmail.com', 'matru', '1234');
                           //_submitForm(model.login, model.signup);
                         },
                       );
