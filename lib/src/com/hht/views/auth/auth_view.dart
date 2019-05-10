@@ -11,9 +11,6 @@ class AuthView extends StatefulWidget {
 }
 
 class _AuthView extends State<AuthView> {
-
-
-
   String confirmEmail;
   String _confirmPassword;
 
@@ -28,10 +25,11 @@ class _AuthView extends State<AuthView> {
   AuthType _authType = AuthType.Login;
 
   Widget _buildEmailTextField() {
-    return TextFormField(style: TextStyle(color: Colors.white) ,obscureText: false,
+    return TextFormField(
+      style: TextStyle(color: Colors.white),
+      obscureText: false,
       decoration: InputDecoration(
         labelStyle: TextStyle(color: Colors.white),
-        
         labelText: 'E-Mail',
       ),
       keyboardType: TextInputType.emailAddress,
@@ -47,16 +45,14 @@ class _AuthView extends State<AuthView> {
   }
 
   Widget _buildPasswordTextField() {
-    return TextFormField(style: TextStyle(color: Colors.white),
+    return TextFormField(
+      style: TextStyle(color: Colors.white),
       controller: _passwordTextEditingController,
       decoration: InputDecoration(
-          labelStyle: TextStyle(color: Colors.white),
-         
-          labelText: 'Password'),
+          labelStyle: TextStyle(color: Colors.white), labelText: 'Password'),
       obscureText: true,
       onSaved: (String value) {
         _formData['password'] = value;
-       
       },
       validator: (String value) {
         if (value.isEmpty) {
@@ -67,13 +63,13 @@ class _AuthView extends State<AuthView> {
   }
 
   Widget _buildPasswordConfirmTextField() {
-    return TextFormField(style: TextStyle(color: Colors.white),
+    return TextFormField(
+      style: TextStyle(color: Colors.white),
       decoration: InputDecoration(
           labelStyle: TextStyle(color: Colors.white),
           labelText: 'Confirm Password'),
       obscureText: true,
       onSaved: (String value) {
-        
         _confirmPassword = value;
       },
       validator: (String value) {
@@ -81,7 +77,6 @@ class _AuthView extends State<AuthView> {
           return 'Password not match';
         }
       },
-      
     );
   }
 
@@ -152,7 +147,8 @@ class _AuthView extends State<AuthView> {
                               : AuthType.Login;
                         });
                       },
-                     textColor: Colors.white,),
+                      textColor: Colors.white,
+                    ),
                     SizedBox(
                       height: 10.0,
                     ),
@@ -164,8 +160,7 @@ class _AuthView extends State<AuthView> {
                         child: Text(
                             '${_authType == AuthType.Login ? 'Login' : 'Sign Up'}'),
                         onPressed: () {
-                          model.signup('andymota@gmail.com', 'matru', '1234');
-                          //_submitForm(model.login, model.signup);
+                          _submitForm(model.login, model.signup);
                         },
                       );
                     }),
@@ -180,6 +175,7 @@ class _AuthView extends State<AuthView> {
   }
 
   void _submitForm(Function login, Function signup) async {
+    bool isMatch = false;
     if (_authType == AuthType.Login) {
       _formData['terms'] = true;
     }
@@ -211,23 +207,28 @@ class _AuthView extends State<AuthView> {
           });
     }
     if (_authType == AuthType.Login) {
-    } else {
-      showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return AlertDialog(
-              title: Text('An Error  Ocurred'),
-              content: Text('message'),
-              actions: <Widget>[
-                FlatButton(
-                  child: Text("Close"),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-              ],
-            );
-          });
+      isMatch = await login(_formData['email'], _formData['password']);
+
+      if (isMatch) {
+        Navigator.pushReplacementNamed(context, '/home');
+      } else {
+        showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text('An Error  Ocurred'),
+                content: Text('message'),
+                actions: <Widget>[
+                  FlatButton(
+                    child: Text("Close"),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              );
+            });
+      }
     }
 
     //  Navigator.pushReplacementNamed(context, '/products');

@@ -1,5 +1,7 @@
 import 'package:feeder/src/com/hht/scope_models/main_model.dart';
 import 'package:feeder/src/com/hht/views/auth/auth_view.dart';
+import 'package:feeder/src/com/hht/views/home/home_view.dart';
+
 import 'package:flutter/material.dart';
 import 'package:scoped_model/scoped_model.dart';
 
@@ -20,6 +22,7 @@ class FeederApp extends StatelessWidget {
             primarySwatch: Colors.green, accentColor: Colors.deepOrange),
         routes: {
           '/': (BuildContext context) => AuthView(),
+           '/home': (BuildContext context) => HomeView()
         },
       ),
     );
