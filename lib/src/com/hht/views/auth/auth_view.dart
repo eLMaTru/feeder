@@ -100,71 +100,82 @@ class _AuthView extends State<AuthView> {
     final double deviceWidth = MediaQuery.of(context).size.width;
     final double targetWidth = deviceWidth > 550.0 ? 500 : deviceWidth * 0.95;
 
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Login",
-        ),
-      ),
-      body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            fit: BoxFit.cover,
-            image: AssetImage('assets/images/food_1280.jpg'),
+    return WillPopScope(
+      onWillPop: () {
+        print('Back Button Pressed');
+        Navigator.popAndPushNamed(context, '/');
+
+        return Future.value(true);
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(
+            "Login",
           ),
         ),
-        padding: EdgeInsets.all(10.0),
-        child: Center(
-          child: SingleChildScrollView(
-            child: Form(
-              key: _formkKey,
-              child: Container(
-                width: targetWidth,
-                child: Column(
-                  children: <Widget>[
-                    _buildEmailTextField(),
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                    _buildPasswordTextField(),
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                    _authType == AuthType.Login
-                        ? Container()
-                        : _buildPasswordConfirmTextField(),
-                    _authType == AuthType.Login ? Container() : _buildSwitch(),
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                    FlatButton(
-                      child: Text(
-                          'Switch to ${_authType == AuthType.Login ? 'Sign Up' : 'Login'}'),
-                      onPressed: () {
-                        setState(() {
-                          _authType = _authType == AuthType.Login
-                              ? AuthType.Signup
-                              : AuthType.Login;
-                        });
-                      },
-                      textColor: Colors.white,
-                    ),
-                    SizedBox(
-                      height: 10.0,
-                    ),
-                    ScopedModelDescendant<MainModel>(builder:
-                        (BuildContext context, Widget child, MainModel model) {
-                      return RaisedButton(
-                        textColor: Colors.white,
-                        color: Theme.of(context).accentColor,
+        body: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              fit: BoxFit.cover,
+              image: AssetImage('assets/images/food_1280.jpg'),
+            ),
+          ),
+          padding: EdgeInsets.all(10.0),
+          child: Center(
+            child: SingleChildScrollView(
+              child: Form(
+                key: _formkKey,
+                child: Container(
+                  width: targetWidth,
+                  child: Column(
+                    children: <Widget>[
+                      _buildEmailTextField(),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      _buildPasswordTextField(),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      _authType == AuthType.Login
+                          ? Container()
+                          : _buildPasswordConfirmTextField(),
+                      _authType == AuthType.Login
+                          ? Container()
+                          : _buildSwitch(),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      FlatButton(
                         child: Text(
-                            '${_authType == AuthType.Login ? 'Login' : 'Sign Up'}'),
+                            'Switch to ${_authType == AuthType.Login ? 'Sign Up' : 'Login'}'),
                         onPressed: () {
-                          _submitForm(model.login, model.signup);
+                          setState(() {
+                            _authType = _authType == AuthType.Login
+                                ? AuthType.Signup
+                                : AuthType.Login;
+                          });
                         },
-                      );
-                    }),
-                  ],
+                        textColor: Colors.white,
+                      ),
+                      SizedBox(
+                        height: 10.0,
+                      ),
+                      ScopedModelDescendant<MainModel>(builder:
+                          (BuildContext context, Widget child,
+                              MainModel model) {
+                        return RaisedButton(
+                          textColor: Colors.white,
+                          color: Theme.of(context).accentColor,
+                          child: Text(
+                              '${_authType == AuthType.Login ? 'Login' : 'Sign Up'}'),
+                          onPressed: () {
+                            _submitForm(model.login, model.signup);
+                          },
+                        );
+                      }),
+                    ],
+                  ),
                 ),
               ),
             ),

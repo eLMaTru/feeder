@@ -49,6 +49,9 @@ flutter:
   assets:
     - assets/images/food_1280.jpg
     - assets/images/food-platter_1280.jpg
+    - assets/images/tmp/arroz-abichuela-carne.jpg
+    - assets/images/tmp/locrio.jpg
+    - assets/images/tmp/moroguandule.jpg
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
