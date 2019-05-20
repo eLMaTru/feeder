@@ -52,6 +52,7 @@ flutter:
     - assets/images/tmp/arroz-abichuela-carne.jpg
     - assets/images/tmp/locrio.jpg
     - assets/images/tmp/moroguandule.jpg
+    - assets/images/tmp/empanadasdo.jpeg
   #  - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

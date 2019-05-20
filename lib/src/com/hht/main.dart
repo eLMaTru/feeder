@@ -1,6 +1,8 @@
 import 'package:feeder/src/com/hht/scope_models/main_model.dart';
 import 'package:feeder/src/com/hht/views/auth/auth_view.dart';
-import 'package:feeder/src/com/hht/views/food_menu.dart';
+
+import 'package:feeder/src/com/hht/views/foods/create_order.dart';
+import 'package:feeder/src/com/hht/views/foods/food_menu.dart';
 import 'package:feeder/src/com/hht/views/home/home_view.dart';
 
 
@@ -27,7 +29,8 @@ class FeederApp extends StatelessWidget{
         routes: {
           '/': (BuildContext context) => AuthView(),
            '/home': (BuildContext context) => HomeView(),
-           '/foodMenu': (BuildContext context) => FoodMenu()
+           '/foodMenu': (BuildContext context) => FoodMenu(),
+           '/createOrder': (BuildContext context) => CreateOrder(),
         },
       ),
     );

@@ -37,5 +37,7 @@ class UColor {
   static const int GRAY = 0xFF9E9E9E;
   //blue gray
   static const int BLUE_GRAY = 0xFF607D8B;
+  //white
+  static const int WHITE = 0xFFFFFFFF;
 
 }

@@ -1,3 +1,4 @@
+import 'package:feeder/src/com/hht/models/drink_type.dart';
 import 'package:feeder/src/com/hht/models/food.dart';
 import 'package:feeder/src/com/hht/scope_models/main_model.dart';
 import 'package:flutter/material.dart';
@@ -52,10 +53,10 @@ class FoodMenu extends StatelessWidget {
       child: Column(
         children: <Widget>[
           FadeInImage(
-            height: 300.0,
+            height: 200.0,
             width: 400.0,
             fit: BoxFit.cover,
-            image: AssetImage(food.image),
+            image:  AssetImage(food.image),
             placeholder: AssetImage('assets/images/food-platter_1280.jpg'),
           ),
           SizedBox(
@@ -87,8 +88,12 @@ class FoodMenu extends StatelessWidget {
               ButtonTheme( buttonColor: Theme.of(context).accentColor,
                   minWidth: 300.0,
                   height: 50.0,
-                  child: RaisedButton(
-                    onPressed: () {},
+                  child: RaisedButton( 
+                    onPressed: () {
+                      model.selectedFoodById(food.id);
+                    //  model.setSelectedDrinkType(DrinkType(id: BigInt.from(0), name: ''));
+                      Navigator.pushNamed(context, "/createOrder");
+                      },
                     child: Text("\Initial order", style: TextStyle(fontSize: 20.0),),
                   ),
                 ),

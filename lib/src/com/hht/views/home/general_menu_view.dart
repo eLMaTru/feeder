@@ -51,7 +51,7 @@ class GeneralMenuView extends StatelessWidget {
           height: 100.0,
           width: 400.0,
           fit: BoxFit.cover,
-          image: NetworkImage(generalMenu.image),
+          image: generalMenu.id == 1 ? AssetImage(generalMenu.image) : NetworkImage(generalMenu.image),
           placeholder: AssetImage('assets/images/food-platter_1280.jpg'),
         ), 
             Container(
